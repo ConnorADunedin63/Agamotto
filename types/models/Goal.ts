@@ -1,6 +1,6 @@
 export default interface Goal {
     name: string;
-    description: string | null;
+    description: string;
     dueDate: Date | null;
-    Tasks: string[]
+    tasks: string[]
 };
