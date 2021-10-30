@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -26,6 +26,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import SplashScreen from 'react-native-splash-screen';
 
 const Section: React.FC<{
   title: string;
@@ -56,6 +58,10 @@ const Section: React.FC<{
 };
 
 const App = () => {
+  // Hide the splash screen
+  useEffect(() => {
+    SplashScreen.hide()
+  }, [])
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
