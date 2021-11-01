@@ -2,8 +2,8 @@ import GoalResponse from './GoalResponse';
 import Goal from '../models/Goal';
 
 interface DataServiceType {
-    saveGoal: (goal: Goal) => GoalResponse
-    editGoal: (goal: Goal) => GoalResponse
+    saveGoal(goal: Goal): Promise<GoalResponse>;
+    editGoal(goal: Goal): Promise<GoalResponse>;
 };
 
 export default DataServiceType;
