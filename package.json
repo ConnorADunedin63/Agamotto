@@ -37,6 +37,7 @@
     "@types/react": "^17"
   },
   "jest": {
+    "setupFiles": ["./jest_setup.js"],
     "preset": "react-native",
     "moduleFileExtensions": [
       "ts",

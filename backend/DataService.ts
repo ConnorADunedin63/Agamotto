@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 /**
  * A class that is responsible for the management of application data
  */
-class DataService implements DataServiceType {
+export default class DataService implements DataServiceType {
     /**
      * A function that saves a goal and returns a GoalResponse
      * @param { Goal } goal: The goal object that should be saved
