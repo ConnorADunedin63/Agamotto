@@ -15,12 +15,12 @@ describe("saveGoal function should", () => {
 
         const result: GoalResponse = await dataService.saveGoal(goalName);
         expect(result.success).toBe(false);
-        expect(result.errors).toBe("Name cannot be blank");
+        expect(result.errors).toBe("Goal name cannot be blank");
     });
 
     it("return false when a name is already used.", async() => {
         const goalValid: Goal = {
-            name: "Test Goal",
+            name: "Test Goal 1",
             description: "",
             dueDate: new Date(),
             tasks: ["Test task"]
@@ -29,7 +29,7 @@ describe("saveGoal function should", () => {
         await dataService.saveGoal(goalValid);
 
         const goalNameDuplicate: Goal = {
-            name: "Test Goal",
+            name: "Test Goal 1",
             description: "",
             dueDate: new Date(),
             tasks: ["Test task"]
@@ -37,12 +37,12 @@ describe("saveGoal function should", () => {
 
         const result: GoalResponse = await dataService.saveGoal(goalNameDuplicate);
         expect(result.success).toBe(false);
-        expect(result.errors).toBe("Name already exists");
+        expect(result.errors).toBe("Goal name already used");
     });
 
     it("return true when the description is blank.", async() => {
         const goalDescription: Goal = {
-            name: "Test Goal",
+            name: "Test Goal 2",
             description: "",
             dueDate: new Date(),
             tasks: ["Test task"]
@@ -54,7 +54,7 @@ describe("saveGoal function should", () => {
 
     it("returns true when the due date is null.", async() => {
         const goalDueDate: Goal = {
-            name: "Test Goal",
+            name: "Test Goal 3",
             description: "",
             dueDate: null,
             tasks: ["Test task"]
@@ -66,7 +66,7 @@ describe("saveGoal function should", () => {
 
     it("returns true when there are no tasks.", async() => {
         const goalTasks: Goal = {
-            name: "Test Goal",
+            name: "Test Goal 4",
             description: "",
             dueDate: new Date(),
             tasks: []
@@ -78,7 +78,7 @@ describe("saveGoal function should", () => {
 
     it("returns true when there are many tasks.", async() => {
         const goalTasks: Goal = {
-            name: "Test Goal",
+            name: "Test Goal 5",
             description: "",
             dueDate: new Date(),
             tasks: ["Test task 1", "Test task 2"]

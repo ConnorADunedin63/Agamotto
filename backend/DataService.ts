@@ -25,23 +25,31 @@ export default class DataService implements DataServiceType {
             return response;
         }
 
+        let keyInUse: boolean = false;
         // Check that the key is not used
-        if(await AsyncStorage.getItem(goal.name) === null) {
-            // Set the key value pair
-            await AsyncStorage.setItem(goal.name, JSON.stringify(goal), (error: Error | undefined) => {
-                // After saving the goal, check that no error has occured
-                if(error !== undefined) {
+        await AsyncStorage.getItem(goal.name, async(error?: Error, result?: string | null) => {
+            // Error while checking key
+            if(error !== undefined && error !== null) {
+                response.errors = error.message;
+                response.success = false;
+            }
+            // If the key is already in use
+            else if(result !== null) { 
+                keyInUse = true;
+                response.errors = "Goal name already used";
+                response.success = false;
+            }
+        });
+
+        // The key has not been used before, ok to save
+        if(!keyInUse && response.errors === null) {
+            await AsyncStorage.setItem(goal.name, JSON.stringify(goal), (error?: Error) => {
+                if(error !== undefined && error !== null) {
                     response.errors = error.message;
                     response.success = false;
                 }
             });
         }
-        // The key is already in use
-        else {
-            response.success = false;
-            response.errors = "Goal Name is already used";
-        }
-
         return response;
     }
 
